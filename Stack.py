@@ -3,7 +3,7 @@ class Stack:
         self.items = []
 
     def pop(self):
-        if not self.isEmpty():
+        if not self.is_empty():
             return self.items.pop()
 
     def push(self, item):
@@ -15,7 +15,7 @@ class Stack:
     def size(self):
         return len(self.items)
 
-    def isEmpty(self):
+    def is_empty(self):
         return self.size() <= 0
 
 
@@ -23,7 +23,7 @@ def reverse_list(stack, my_list):
     for i in range(len(my_list)):
         stack.push(i)
     print(stack.items)
-    while not stack.isEmpty():
+    while not stack.is_empty():
         print(stack.pop())
 
 # print(reverse_list())

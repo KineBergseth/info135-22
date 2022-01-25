@@ -76,8 +76,8 @@ my_list2 = []
 for x in range(964):
     my_list2.append(x)
 
-print("Simple search big O:", simple_search_big_o(my_list))
-print("Binary search big O:", binary_search_big_o(my_list))
+print("Simple search big O:", simple_search_big_o(my_list)) # O 1 | o N
+print("Binary search big O:", binary_search_big_o(my_list)) # O 1 | O LOG n
 print()
 
 
