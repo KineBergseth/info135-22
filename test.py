@@ -114,6 +114,7 @@ class SavingsAccount(Account):
         interest = self.balance * 0.05
         print(f"Calculated interest gain for the year based on the current balance is {interest} kr")
 
+
 if __name__ == "__main__":
     bill_list = [("Strøm", 1234), ("Leie", 5000), ("Wolfram alpha", 200), ("Velvære", 5000)]
     joe = Account("Joe", 1000)

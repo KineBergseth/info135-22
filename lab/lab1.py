@@ -69,7 +69,13 @@ def simple_search_big_o(input_list):
 
 
 # Testing the functions with a list containing 964 elements
-my_list = [x for x in range(964)]
+my_list = [x for x in range(964)]  # list comprehension
+
+# kan skrive det samme på denne måten også
+my_list2 = []
+for x in range(964):
+    my_list2.append(x)
+
 print("Simple search big O:", simple_search_big_o(my_list))
 print("Binary search big O:", binary_search_big_o(my_list))
 print()
