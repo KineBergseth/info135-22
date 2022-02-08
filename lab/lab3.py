@@ -1,5 +1,5 @@
 """
-INFO135 - Lab 4 suggested solutions
+INFO135 - Lab 3 suggested solutions
 Note that this is simply a suggestion of how to solve the tasks, there will be many other valid
 solutions. :D
 
@@ -41,57 +41,39 @@ selection_sort_one_pass([5, 2, 3, 4, 0, 1])
 unsorted_list: List[int] = [5, 2, 3, 4, 0, 1]
 
 
-def one_pass(li: List[int], index: int) -> List[int]:
+def one_pass(li: List[int]) -> List[int]:
     """
-    The first item in a unsorted partition is compared with all the values to the right-hand side to check if it is
-    the minimum value. If it is not the minimum value, then its position is swapped with the minimum value.
-    :param li: an unsorted list containing integers
-    :param index: Indicate the left most item (first position) in the unsorted partition by index
-    :return: list containing integers, with one sorted pass performed
+        The first item in an unsorted partition is compared with all the values to the right-hand side to check if it is
+        the minimum value. If it is not the minimum value, then its position is swapped with the minimum value.
+        :param li: an unsorted list containing integers
+        :return: list containing integers, with one sorted pass performed
     """
-    # Create sublist from first position, where the leftmost value (index) is the start of the partition
-    sub_list = li[index:]
-    # Find the minimum element in the unsorted subarray
-    smallest = min(sub_list)
-    # Find the index of the minimum element on the right hand side of first position
-    # sub_list.index(smallest) excludes values not in sub_list, does not start at index 0 of li
-    # to find real index in li (argument), we make up for potential items on the left side of sub_list hence + index
-    smallest_index = sub_list.index(smallest) + index
-
+    smallest = min(li)  # Find the minimum element in the unsorted subarray
+    smallest_index = li.index(smallest)  # Find the index of the minimum element
     # Swap the found minimum element with the first element
     # The first position takes the position previously held by the lower value, and
     # The lower value from the right-hand side takes the first position
-    li[index], li[smallest_index] = li[smallest_index], li[index]
-
-    """
-    # Python allows us to switch the elements with a = b, b = a in one line as seen on the line above ^
-    # Another way to switch the values is to hold them in temp variable like so:
-    # The leftmost value (index) is stored in a temporal variable
-    temp = li[index]
-    # The lower value from the right-hand side takes the first position in the list
-    li[index] = li[smallest_index]
-    # The value stored in the temporal value is stored in the position that was previously held by the minimum value
-    li[smallest_index] = temp
-    """
-
-    # Returns the list as the function result
-    return li
-
-
-def one_pass_index_0(li: List[int]) -> List[int]:
-    smallest = min(li)
-    smallest_index = li.index(smallest)
     li[0], li[smallest_index] = li[smallest_index], li[0]
     return li
 
 
-print(one_pass_index_0(unsorted_list))
+"""
+        # Python allows us to switch the elements with a = b, b = a in one line as seen on the line above ^
+        # Another way to switch the values is to hold them in temp variable like so:
+        # The leftmost value (index) is stored in a temporal variable
+        temp = li[index]
+        # The lower value from the right-hand side takes the first position in the list
+        li[index] = li[smallest_index]
+        # The value stored in the temporal value is stored in the position that was previously held by the minimum value
+        li[smallest_index] = temp
+"""
 
 # print the unsorted list
 print(f"Unsorted list: {unsorted_list}")
 # Print the list after calling the one pass function, passing in unsorted list as the parameter
-print(f"One pass result: {one_pass(unsorted_list, 0)}")
+print(f"One pass result: {one_pass(unsorted_list)}")
 print()  # Create empty line before next print to separate exercises prints
+
 
 """
 Exercise 2 
@@ -210,7 +192,7 @@ def bubble_sort(str_list: List[str]) -> None:
         # Inner loop that compares all the values in the list from the first to the last one
         for j in range(0, list_length - 1):
             """ If you want to see step by step of the bubble sort in console, uncomment the print statement below! """
-            # print(str_list)
+            #print(str_list)
             # Check if the value on the left-hand side is greater than the one on the immediate right side
             if str_list[j] > str_list[j + 1]:
                 # Swap elements if the element found is greater than the next element
