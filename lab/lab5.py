@@ -80,8 +80,40 @@ b) What is the O notation to your algorithm you think?
 """
 
 
-# A recursive method for the fibonacci list, not effective at all is O(2^N)
-# Would be better if we could let this method have some sort of way of remembering....
+"""
+A recursive method for the fibonacci list, not effective at all is O(2^N)
+To calculate F(n), the maximum depth of the call tree is n, and 
+since each function call produces two additional function calls, the time complexity of this recursive function is O(2n)
+
+Inside recur_fibo(), you first check the base case. 
+You then return the sum of the values that results from calling the function with the two preceding values of n. 
+The computation gets more and more expensive as n gets bigger. 
+The required time grows exponentially because the function calculates many identical subproblems over and over again.
+To calculate F(5), recur_fibo() has to call itself 15 times.
+
+Generating the Fibonacci sequence is a classic recursive problem. Recursion is when a function refers to itself to 
+break down the problem it’s trying to solve. In every function call, the problem becomes smaller until it reaches a 
+base case, after which it will then return the result to each intermediate caller until it returns the final result 
+back to the original caller. 
+
+If you wanted to calculate the F(5) Fibonacci number, you’d need to calculate its predecessors, F(4) and F(3), 
+first. And in order to calculate F(4) and F(3), you would need to calculate their predecessors. The breakdown of F(5) 
+into smaller subproblems would look like this: 
+
+F(5) = F(4) + F(3)
+     = F(3) + F(2) + F(2) + F(1)
+     = F(2) + F(1) + F(1) + F(0) + F(1) + F(0) + 1
+     = F(1) + F(0) + 1 + 1 + 0 + 1 + 0 + 1
+     = 1 + 0 + 1 + 1 + 0 + 1 + 0 + 1
+     = 5
+     
+Each time the Fibonacci function is called, it gets broken down into two smaller subproblems because that’s how you 
+defined the recurrence relation. When it reaches the base case of either F(0) or F(1), it can finally return a result 
+back to its caller. 
+
+Do not try this function with a number greater than 50. Depending on your hardware,
+you might be waiting for a long time before seeing the result—if you make it to the end.
+"""
 def recur_fibo(n):
     if n <= 1:
         return n
@@ -89,7 +121,7 @@ def recur_fibo(n):
         return recur_fibo(n - 1) + recur_fibo(n - 2)
 
 
-nterms = 7
+nterms = 5
 
 # check if the number of terms is valid
 if nterms <= 0:
