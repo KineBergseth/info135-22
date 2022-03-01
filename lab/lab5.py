@@ -1,11 +1,11 @@
 """
 Task 1:
 
-Joe has made his own minibank system that stores the amount of money he currently has, can be used to pay bills,
+Joe has made his own ATM system that stores the amount of money he currently has, can be used to pay bills,
 and can sort incoming bills from highest to lowest, only criteria is that you make a class with these functions.
 
-Bonus points if you add other functions you would want in a personal minibank system. A way of adding money to the system
-or pay afriend method, or a way of authentication maybe?
+Bonus points if you add other functions you would want in a personal ATM system. A way of adding money to the system
+or pay a friend method, or a way of authentication maybe?
 """
 
 
@@ -79,7 +79,6 @@ There is a ton of possible ways to do this:D
 b) What is the O notation to your algorithm you think?
 """
 
-
 """
 A recursive method for the fibonacci list, not effective at all is O(2^N)
 To calculate F(n), the maximum depth of the call tree is n, and 
@@ -114,22 +113,18 @@ back to its caller.
 Do not try this function with a number greater than 50. Depending on your hardware,
 you might be waiting for a long time before seeing the result—if you make it to the end.
 """
-def recur_fibo(n):
+
+
+def fibo(n):
     if n <= 1:
         return n
     else:
-        return recur_fibo(n - 1) + recur_fibo(n - 2)
+        return fibo(n - 1) + fibo(n - 2)
 
 
-nterms = 5
-
-# check if the number of terms is valid
-if nterms <= 0:
-    print("Plese enter a positive integer")
-else:
-    print("Fibonacci sequence:")
-    for i in range(nterms):
-        print(recur_fibo(i))
+length = 5
+for i in range(length):
+    print(fibo(i))
 
 """
 Task 3
