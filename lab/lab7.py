@@ -16,16 +16,15 @@ print(f"5! = {recur_factorial(5)}")
 def truncation_hash(key):
     key_to_string = str(key)
     hash_value = ""
-    i = 1
+    count = 1
     for char in key_to_string:
-        if i % 3 == 0 or i % 5 == 0:
+        if count % 3 == 0 or count % 5 == 0:
             hash_value += char
-        i += 1
-
+        count += 1
     return hash_value
 
 
-my_key = 1234567890
+my_key = 94283641911
 hashed_key = truncation_hash(my_key)
 print(f"{my_key} hashed to {hashed_key}")
 
