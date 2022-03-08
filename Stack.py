@@ -19,6 +19,18 @@ class Stack:
         return self.size() <= 0
 
 
+def r(liste):
+    s = Stack()
+    for item in liste:
+        s.push(item)
+
+
+
+
+
+
+
+
 def reverse_list(stack, my_list):
     for i in range(len(my_list)):
         stack.push(i)

@@ -1,7 +1,6 @@
 class Account:
-
     def __init__(self, name, money): pass
-
+    # FORSLAG TIL METODER MAN KAN IMPLEMENTERE
     # method to deposit money into account based on input value, and print relevant info
     def deposit_money(self): pass
 

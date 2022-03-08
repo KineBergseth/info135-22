@@ -75,6 +75,41 @@ print(f"One pass result: {one_pass(unsorted_list)}")
 print()  # Create empty line before next print to separate exercises prints
 
 
+def one_pass_index(li: List[int], index: int) -> List[int]:
+    """
+    Here user can input index (start point that is to be switched), a bit more complex than first way
+    The first item in an unsorted partition is compared with all the values to the right-hand side to check if it is
+    the minimum value. If it is not the minimum value, then its position is swapped with the minimum value.
+    :param li: an unsorted list containing integers
+    :param index: Indicate the left most item (first position) in the unsorted partition by index
+    :return: list containing integers, with one sorted pass performed
+    """
+    # Create sublist from first position, where the leftmost value (index) is the start of the partition
+    sub_list = li[index:]
+    # Find the minimum element in the unsorted subarray
+    smallest = min(sub_list)
+    # Find the index of the minimum element on the right-hand side of first position
+    # sub_list.index(smallest) excludes values not in sub_list, does not start at index 0 of li
+    # to find real index in li (argument), we make up for potential items on the left side of sub_list hence + index
+    smallest_index = sub_list.index(smallest) + index
+
+    # Swap the found minimum element with the first element
+    # The first position takes the position previously held by the lower value, and
+    # The lower value from the right-hand side takes the first position
+    li[index], li[smallest_index] = li[smallest_index], li[index]
+
+    """
+    # Python allows us to switch the elements with a = b, b = a in one line as seen on the line above ^
+    # Another way to switch the values is to hold them in temp variable like so:
+    # The leftmost value (index) is stored in a temporal variable
+    temp = li[index]
+    li[index] = li[smallest_index]
+    li[smallest_index] = temp
+    """
+
+    return li
+
+
 """
 Exercise 2 
 
@@ -142,7 +177,7 @@ def selection_sort(t_list: List[Tuple[int, int, int]]) -> None:
             # Finds the minimum value in the unsorted list and places it in its proper position
             # [nth] sort by the nth element of tuple
             if t_list[smallest_index][nth] > t_list[j][nth]:
-                # Update smallest value if the condition is true
+                # Update the smallest value if the condition is true
                 smallest_index = j
 
         # Swap the found minimum element with the first element
@@ -192,7 +227,7 @@ def bubble_sort(str_list: List[str]) -> None:
         # Inner loop that compares all the values in the list from the first to the last one
         for j in range(0, list_length - 1):
             """ If you want to see step by step of the bubble sort in console, uncomment the print statement below! """
-            #print(str_list)
+            print(str_list)
             # Check if the value on the left-hand side is greater than the one on the immediate right side
             if str_list[j] > str_list[j + 1]:
                 # Swap elements if the element found is greater than the next element
@@ -248,5 +283,6 @@ potential_anagrams: List[Tuple[str, str]] = [('abc', 'cda'), ('ABBA', 'baba'), (
 
 print()  # make empty line to separate from last print
 # for each tuple in the list potential_anagrams, check if the pair is an anagram
+# this way I can check many pairs with one function call
 for string in potential_anagrams:
     anagram_checker(string[0], string[1])

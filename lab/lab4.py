@@ -10,7 +10,7 @@ What do you think the O notation of a function is given the following amount of 
 
 a) 113 115 operations = Log-Linear Complexity O(n log2 n) / O(n log n)
 Big O notation ignores constants.
-It's O(n log2 n) in this calculation but we ignore the base in big-O since it talks about relative growth rates.
+It's O(n log2 n) in this calculation, but we ignore the base in big-O since it talks about relative growth rates.
 Log2 is a constant multiplier and does not make much difference for large numbers,
 so such a multiplier is irrelevant to big-O classification and reduced to O(n log n).
 * in practise constant multiplies do matter, but in theory big-O looks at infinity where it is not that significant
@@ -153,15 +153,16 @@ def partition(li, low, high, pivot):
     :param pivot: selected pivot element
     :return: final location of pivot element
     """
-    i = low  # smaller element
+    i = low  # second pointer
     j = low
+    # traverse through all elements compare each element with pivot
     while j < high:
         if li[j] < pivot:
-            # When jth element is less than pivot, swap them
+            #  if element smaller than pivot is found swap it with the greater element
             li[i], li[j] = li[j], li[i]
-            i += 1  # # increment index of smaller element
+            i += 1  # increment index of smaller element
         elif li[j] == pivot:
-            # # When jth element is equal to pivot, swap them
+            # When jth element is equal to pivot, swap them
             li[j], li[high] = li[high], li[j]
             j -= 1
         j += 1
@@ -180,7 +181,10 @@ def quick_sort(nuts, bolts, low, high):
     :param high: ending index
     """
     if low < high:
-        # partition nuts with highest bolt as pivot
+        # find pivot element such that element smaller than pivot are on the left,
+        # element greater than pivot are on the right
+
+        # partition nuts with the highest bolt as pivot (rightmost element)
         pivot = partition(nuts, low, high, bolts[high])
         # partition bolts around nuts final position, so that matching bolt also is in its final position
         partition(bolts, low, high, nuts[pivot])

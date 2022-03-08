@@ -64,6 +64,7 @@ class Account:
             return
         else:
             self.balance -= bills[bill][1]
+            bills.pop(bills.index(bills[bill]))
             print(f"You have payed the bill from {bills[bill][0]} at the price of {bills[bill][1]} kr")
             self.display_balance()
             self.add_transaction_to_history(bills[bill][0], bills[bill][1], "CREDIT")
@@ -80,7 +81,7 @@ class Account:
                 print(f"You have payed the bill for {tuple[0]} at the price of {tuple[1]} kr")
                 self.display_balance()
                 self.add_transaction_to_history(tuple[0], tuple[1], "CREDIT")
-                # If all bills are payed, inform the client of so
+                # If all bills are paid, inform the client of so
                 if index == len(bill_list) - 1:
                     print("All the bills are payed")
 
@@ -114,6 +115,7 @@ class SavingsAccount(Account):
         interest = self.balance * 0.05
         print(f"Calculated interest gain for the year based on the current balance is {interest} kr")
 
+
 if __name__ == "__main__":
     bill_list = [("Strøm", 1234), ("Leie", 5000), ("Wolfram alpha", 200), ("Velvære", 5000)]
     joe = Account("Joe", 1000)
@@ -122,7 +124,9 @@ if __name__ == "__main__":
     print(bill_list)
     joe.deposit_money()
     joe.withdraw_money()
-    joe.pay_all_bills()
+    #joe.pay_all_bills()
+    joe.pay_bill(bill_list)
+    print(bill_list)
     joe.transfer_money_to_friend(sara)
     print()
     print(joe.print_transaction_history())
