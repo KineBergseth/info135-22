@@ -1,82 +1,66 @@
-# Exercise 1 - recursion
+
+"""
+Exercise 1
+
+graph = [(“A”,“B”), (“A”,“C”), (“B”,“A”), (“C”,“A”), (“B”,“C”)]
+
+Given the Graph graph, make a function remove_node(node) which removes all edges connected to a given node.
+"""
 
 
-def recur_factorial(n):
-    if n == 1:
-        return n
-    return n * recur_factorial(n - 1)
+class Graph:
+    graph = dict()
+    searched = []
 
-
-# Testing with 5 = 5 * 4 * 3 * 2 * 1 = 120
-print(f"5! = {recur_factorial(5)}")
-
-
-# Exercise 2 - Hash functions
-# a
-def truncation_hash(key):
-    key_to_string = str(key)
-    hash_value = ""
-    count = 1
-    for char in key_to_string:
-        if count % 3 == 0 or count % 5 == 0:
-            hash_value += char
-        count += 1
-    return hash_value
-
-
-my_key = 94283641911
-hashed_key = truncation_hash(my_key)
-print(f"{my_key} hashed to {hashed_key}")
-
-
-# b
-def string_hash(key):
-    hash_value = 1
-    for char in key:
-        hash_value *= ord(char)
-
-    return hash_value
-
-
-my_key = "hello"
-hashed_key = string_hash(my_key)
-print(f"{my_key} string hashed to {hashed_key}")
-
-# Exercise 3
-import hashlib as h1
-
-
-class PasswordDatabase:
-    def __init__(self):
-        self.passwords = {}
-
-    def get_login(self):
-        username = input("Enter username: ")
-        password = h1.sha1(input("Enter password: ").encode()).hexdigest()
-        return username, password
-
-    def create_user(self):
-        username, password = self.get_login()
-        self.passwords[username] = password
-        print(f"User {username} created!")
-
-    def check_password(self, username, password):
-        if self.passwords[username] == password:
-            return True
-        return False
-
-    def update_password(self):
-        username, password = self.get_login()
-        login_is_correct = self.check_password(username, password)
-        if login_is_correct:
-            password = h1.sha1(input("Enter new password: ").encode()).hexdigest()
-            self.passwords[username] = password
+    def add_edge(self, node, neighbour):
+        if node not in self.graph:
+            self.graph[node] = [neighbour]
         else:
-            print("Incorrect login...")
+            self.graph[node].append(neighbour)
+
+    def print_graph(self):
+        print(self.graph)
+
+    def print_edges(self):
+        for nodes in self.graph:
+            for neighbour in self.graph[nodes]:
+                print("(", nodes, ",", neighbour, ")")
+
+    # Method that removes the given node and the edges
+    # Sets nodes that are only connected to the node that is about to be deleted as []
+    def delete_edges(self, node):
+        del self.graph[node]
+        for nodes in self.graph:
+            p = len(self.graph[nodes])
+            if self.graph[nodes][p-1] == node:
+                del self.graph[nodes][p-1]
 
 
-db = PasswordDatabase()
-db.create_user()
-print(db.passwords)
-db.update_password()
-print(db.passwords)
+my_graph1 = Graph()
+my_graph1.add_edge('A', 'B')
+my_graph1.add_edge('A', 'C')
+my_graph1.add_edge('B', 'A')
+my_graph1.add_edge('C', 'A')
+my_graph1.add_edge('B', 'C')
+
+print('before ')
+my_graph1.print_graph()
+#my_graph1.print_edges()
+my_graph1.delete_edges('A')
+print('After ')
+my_graph1.print_graph()
+
+
+class Course:
+    def __init__(self, title, year):
+        self.title = title
+        self.year = year
+
+    def hash_it(self):
+        text = self.title + str(self.year)
+        hash_value = hash(text)
+        print(hash_value)
+
+
+my_course = Course('INFO125', 2022)
+my_course.hash_it()

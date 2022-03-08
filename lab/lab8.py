@@ -13,63 +13,6 @@ C is full, perfect, complete binary tree.
 
 
 
-""""
-Exercise 2
-
-graph = [(“A”,“B”), (“A”,“C”), (“B”,“A”), (“C”,“A”), (“B”,“C”)] 
-
-Given the Graph graph, make a function remove_node(node) which removes all edges connected to a given node. 
-"""
-
-
-class Graph:
-    graph = dict()
-    searched = []
-
-    def add_edge(self, node, neighbour):
-        if node not in self.graph:
-            self.graph[node] = [neighbour]
-        else:
-            self.graph[node].append(neighbour)
-
-    def print_graph(self):
-        print(self.graph)
-
-    def print_edges(self):
-        for nodes in self.graph:
-            for neighbour in self.graph[nodes]:
-                print("(", nodes, ",", neighbour, ")")
-
-    # Method that removes the given node and the edges
-    # Sets nodes that are only connected to the node that is about to be deleted as []
-    # Can you spot some not intended features or bugs?
-    def delete_edges(self, node):
-        del self.graph[node]
-        for nodes in self.graph:
-            p = len(self.graph[nodes])
-            if self.graph[nodes][p-1] == node:
-                del self.graph[nodes][p-1]
-
-
-
-my_graph1 = Graph()
-my_graph1.add_edge('1', '2')
-my_graph1.add_edge('3', '2')
-my_graph1.add_edge('2', '3')
-my_graph1.add_edge('2', '4')
-my_graph1.add_edge('1', '3')
-my_graph1.add_edge('1','4')
-my_graph1.add_edge('2','1')
-my_graph1.add_edge('4','2')
-my_graph1.add_edge('4','1')
-my_graph1.add_edge('5','1')
-
-print('before ')
-my_graph1.print_graph()
-my_graph1.delete_edges('1')
-print('After ')
-my_graph1.print_graph()
-
 """
 You are faced with a security door with a super secret password that you want to hack.
 

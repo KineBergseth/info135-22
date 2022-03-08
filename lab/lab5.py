@@ -5,7 +5,7 @@ Joe has made his own minibank system that stores the amount of money he currentl
 and can sort incoming bills from highest to lowest, only criteria is that you make a class with these functions.
 
 Bonus points if you add other functions you would want in a personal minibank system. A way of adding money to the system
-or pay afriend method, or a way of authentication maybe?
+or pay a friend method, or a way of authentication maybe?
 """
 
 
@@ -13,6 +13,21 @@ class MiniBank:
 
     def __init__(self, money):
         self.money = money
+
+    def deposit_money(self):
+        amount = float(input("Enter amount of money you wish to deposit into your bank account: "))
+        self.money += amount
+        print(f"Money deposited: {amount} kr, Total balance: {self.money} kr")
+
+    # method to withdraw money from account based on input value, and print relevant info
+    def withdraw_money(self):
+        amount = float(input("Enter amount of money you wish to withdraw from your bank account: "))
+        if amount > self.money:
+            print("Insufficient funds")
+            return
+        else:
+            self.money -= amount
+            print(f"Money withdrawn: {amount} kr, Total balance: {self.money} kr")
 
     # Sorting method that uses merge sort as seen in lectures
     def sort_bills(self, bills):
@@ -68,7 +83,8 @@ joe = MiniBank(6000)
 joe.sort_bills(bills)
 print(bills)
 joe.pay_bill(bills)
-
+joe.deposit_money()
+joe.withdraw_money()
 """
 Task 2 fibonaci and O(n)
 Fibonaci sequence is where one number is the sum of previous two numbers

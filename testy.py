@@ -1,31 +1,17 @@
-print("\n Oppgave 3")
+def dup_sort(string1):
+    def sort_list(liste):
+        for i in range(0, len(liste) - 1):
+            for j in range(len(liste) - 1):
+                if liste[j] > liste[j + 1]:
+                    new = liste[j]
+                    liste[j] = liste[j + 1]
+                    liste[j + 1] = new
+        return liste
+
+    sort_list(string1)
+    return list(dict.fromkeys(string1))
 
 
-def finn_minste(arr):
-    minste = arr[0]
-    minste_indeks = 0
-    for i in range(1, len(arr)):
-        if arr[i] < minste:
-            minste = arr[i]
-            minste_indeks = i
-        return minste_indeks
+my_list = [5, 3, 1, 7, 4, 3, 2, 1, 2, 3, 4, 5]
+print(dup_sort(my_list))
 
-
-def sort_and_rem_dup(arr):
-    new_list = []
-    for pass_num in range(len(arr) - 1, 0, -1):
-
-        for i in range(pass_num):
-            if arr[i] > arr[i + 1]:
-                temp = arr[i]
-                arr[i] = arr[i + 1]
-                arr[i + 1] = temp
-    for value in arr:
-        if value not in new_list:
-            new_list.append(value)
-    return new_list
-
-
-my_list = [5, 4, 3, 2, 1, 2, 3, 4, 5]
-new_list = sort_and_rem_dup(my_list)
-print(new_list)
