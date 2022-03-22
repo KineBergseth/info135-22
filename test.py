@@ -1,157 +1,48 @@
-class Account:
+# Task 3)
 
-    def __init__(self, name, money):
-        self.name = name
-        self.balance = money
-        self.transaction_history = []
+class Graph:
+    graph = dict()
+    searched = []
 
-    # method to deposit money into account based on input value, and print relevant info
-    def deposit_money(self):
-        amount = float(input("Enter amount of money you wish to deposit into your bank account: "))
-        self.balance += amount
-        print(f"Money deposited: {amount} kr, Total balance: {self.balance} kr")
-        self.add_transaction_to_history("deposited", amount, "DEBIT")
+    def depth_first_search(self, node):
+        if node not in self.searched:
+            print("[", node, end="],")
+            self.searched.append(node)
+            if node in self.graph:
+                for neighbour in self.graph[node]:
+                    if neighbour in self.searched:
+                        print('cycle found')
+                    else:
+                        self.depth_first_search(neighbour)
 
-    # method to withdraw money from account based on input value, and print relevant info
-    def withdraw_money(self):
-        amount = float(input("Enter amount of money you wish to withdraw from your bank account: "))
-        if amount > self.balance:
-            print("Insufficient funds")
-            return
+
+    def add_edge(self, node, neighbour):
+        if node not in self.graph:
+            self.graph[node] = [neighbour]
         else:
-            self.balance -= amount
-            print(f"Money withdrawn: {amount} kr, Total balance: {self.balance} kr")
-            self.add_transaction_to_history("withdrawn", amount, "CREDIT")
+            self.graph[node].append(neighbour)
 
-    # print current balance
-    def display_balance(self):
-        print(f"Current balance is: {self.balance}")
+    def print_graph(self):
+        print(self.graph)
 
-    # sort bills from highest to lowest with merge sort
-    def sort_bills(self, bills):
-        if len(bills) > 1:
-            mid = len(bills) // 2
-            left = bills[:mid]
-            right = bills[mid:]
-            self.sort_bills(left)
-            self.sort_bills(right)
-            i = j = k = 0
-            while i < len(left) and j < len(right):
-
-                if left[i][1] > right[j][1]:
-                    bills[k] = left[i]
-                    i += 1
-                else:
-                    bills[k] = right[j]
-                    j += 1
-                k += 1
-
-            while i < len(left):
-                bills[k] = left[i]
-                i += 1
-                k += 1
-            while j < len(right):
-                bills[k] = right[j]
-                j += 1
-                k += 1
-
-    # pay a selected bill from the bill list if possible
-    def pay_bill(self, bills):
-        print(self.sort_bills(bill_list))
-        bill = int(input("Enter the index of the bill you want to pay: "))
-        if self.balance < bills[bill][1]:
-            print(f"Insufficient funds")
-            return
-        else:
-            self.balance -= bills[bill][1]
-            print(f"You have payed the bill from {bills[bill][0]} at the price of {bills[bill][1]} kr")
-            self.display_balance()
-            self.add_transaction_to_history(bills[bill][0], bills[bill][1], "CREDIT")
-
-    # pay all the bills if possible, starting with the highest one
-    def pay_all_bills(self):
-        self.sort_bills(bill_list)
-        for index, tuple in enumerate(bill_list):
-            if self.balance < tuple[1]:
-                print(f"Insufficient funds, cannot pay the bill from {tuple[0]}")
-                return
-            else:
-                self.balance -= tuple[1]
-                print(f"You have payed the bill for {tuple[0]} at the price of {tuple[1]} kr")
-                self.display_balance()
-                self.add_transaction_to_history(tuple[0], tuple[1], "CREDIT")
-                # If all bills are payed, inform the client of so
-                if index == len(bill_list) - 1:
-                    print("All the bills are payed")
-
-    # transfer money to another persons account
-    def transfer_money_to_friend(self, individual):
-        amount = float(input(f"Enter amount of money you wish to transfer to {individual.name}: "))
-        if self.balance < amount:
-            print(f"Insufficient funds, cannot transfer money to {individual.name}")
-        else:
-            self.balance -= amount
-            individual.balance += amount
-            print(f"{self.name} has transferred {amount} kr to {individual.name}")
-            self.add_transaction_to_history(individual.name, amount, "CREDIT")
-
-    # helper function, adds transaction to history
-    def add_transaction_to_history(self, recipient, amount, inout):
-        self.transaction_history.insert(0, (recipient, amount, inout))
-
-    # show transfer history
-    def print_transaction_history(self):
-        print("TRANSACTION HISTORY: ")
-        for source, amount, inout in self.transaction_history:
-            print(f"Source: {source}, Amount in kr: {amount}, {inout}")
+    def print_edges(self):
+        for node in self.graph:
+            for neighbour in self.graph[node]:
+                print("(", node, ",", neighbour, ")")
 
 
-class SavingsAccount(Account):
-    def __init__(self, name, money):
-        super().__init__(name, money)
+my_graph = Graph()
+my_graph.add_edge('A', 'B')
+my_graph.add_edge('B', 'D')
+my_graph.add_edge('C', 'B')
+my_graph.add_edge('C', 'J')
+my_graph.add_edge('D', 'E')
+my_graph.add_edge('D', 'F')
+my_graph.add_edge('E', 'C')
+my_graph.add_edge('E', 'G')
+my_graph.add_edge('F', 'H')
+my_graph.add_edge('G', 'I')
 
-    def calculate_interest(self):
-        interest = self.balance * 0.05
-        print(f"Calculated interest gain for the year based on the current balance is {interest} kr")
+result = my_graph.depth_first_search('B')
+print(result)
 
-
-if __name__ == "__main__":
-    bill_list = [("Strøm", 1234), ("Leie", 5000), ("Wolfram alpha", 200), ("Velvære", 5000)]
-    joe = Account("Joe", 1000)
-    sara = Account("Sara", 1000)
-    # joe.sort_bills(bill_list)
-    print(bill_list)
-    joe.deposit_money()
-    joe.withdraw_money()
-    joe.pay_all_bills()
-    joe.transfer_money_to_friend(sara)
-    print()
-    print(joe.print_transaction_history())
-
-    print()
-    print("Joe's savings account: ")
-    joeS = SavingsAccount("Joe", 3000)
-    joeS.display_balance()
-    joeS.calculate_interest()
-def finn_minste(arr):
-    minste = arr[0]
-    minste_indeks = 0
-    for i in range(1, len(arr)):
-        if arr[i] < minste:
-            minste = arr[i]
-            minste_indeks = i
-    return minste_indeks
-
-def sort_and_rem_dup(arr):
-
-    for pass_num in range(len(arr) - 1, 0, -1):
-
-        for i in range(pass_num):
-            if arr[i] > arr[i + 1]:
-                temp = arr[i]
-                arr[i] = arr[i + 1]
-                arr[i + 1] = temp
-
-my_list = [5, 4, 3, 2, 1, 2, 3, 4, 5]
-new_list = sort_and_rem_dup(my_list)
-print(my_list)

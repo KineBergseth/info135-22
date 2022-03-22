@@ -24,6 +24,7 @@ def build_my_tree():
 
     return my_tree
 
+
 tree = build_my_tree()
 print(f"Level 0:\t\t   {tree.value}")
 print(f"Level 1:\t{tree.left_child.value}\t\t\t{tree.right_child.value}")
