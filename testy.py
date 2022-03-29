@@ -19,9 +19,14 @@ class Graph:
                     if neighbour not in searched:
                         searched.append(neighbour)
                         search_queue.append(neighbour)
-                    else:
-                        return True
-        return False
+
+    def depth_first_search(self, node):
+        if node not in self.searched:
+            self.searched.append(node)
+            print("[", node, end=" ], ")
+            if node in self.graph:
+                for neighbour in self.graph[node]:
+                    self.depth_first_search(neighbour)
 
     def add_edge(self, node, neighbour):
         if node not in self.graph:
@@ -40,16 +45,19 @@ class Graph:
 
 my_graph = Graph()
 my_graph.add_edge('A', 'B')
+my_graph.add_edge('A', 'C')
+my_graph.add_edge('B', 'C')
 my_graph.add_edge('B', 'D')
-my_graph.add_edge('C', 'B')
-my_graph.add_edge('C', 'J')
+my_graph.add_edge('C', 'E')
 my_graph.add_edge('D', 'E')
-my_graph.add_edge('D', 'F')
-my_graph.add_edge('E', 'C')
-my_graph.add_edge('E', 'G')
-my_graph.add_edge('F', 'H')
-my_graph.add_edge('G', 'I')
+my_graph.add_edge('D', 'G')
+my_graph.add_edge('D', 'H')
+my_graph.add_edge('E', 'F')
+my_graph.add_edge('F', 'C')
 
-result = my_graph.breadth_first_search('A')
+result = my_graph.depth_first_search('A')
 print(result)
 
+"""
+Får en importError pga import statementene dine øverst
+"""
