@@ -4,60 +4,64 @@
 # and returns the maximum total profit as well as the weights connected to the items in the sack.
 
 
-def knapSack(W, wt, val, n): 
+values = [120, 200, 150, 350, 100, 90]
+weights = [15, 20, 40, 50, 20, 10]
+capacity = 100
+n = len(values)
+
+
+def detailed_knap_sack(values, weights, capacity):
     
     #lage rutenett
-    table = [[0 for x in range(W + 1)] for x in range(n + 1)] 
- 
-    for i in range(n + 1): 
-        for j in range(W + 1): 
-            if i == 0 or j == 0: 
-                # sett rad/kolonne til 0. ingen objekter er lagt til ennå
-                table[i][j] = 0
+    k = [[0 for _ in range(capacity + 1)] for _ in range(len(weights) + 1)]
+
+    for i in range(len(weights) + 1):
+        for w in range(capacity + 1):
+            # sett rad/kolonne til 0. ingen objekter er lagt til ennå
+            if i == 0 or w == 0:
+                k[i][w] = 0
             # For hver celle [i][j] har vi to valg:
             # inkludere objektet [i] i sekken
             # ikke inkludere objektet [i] i sekken
             # Hvordan velger vi hva vi vil beholde?
             
             #sjekke om ith objekt er mindre en totalvekten for cellen j
-            elif wt[i-1] <= j: 
+            elif weights[i - 1] <= w:
                 # velge max fra det vi har tilgjengelig 
                 # table[i – 1][j] IKKE INKLUDERE
                 # val[i – 1] + table[i – 1][j – wt[i – 1]] INKLUDERE
-                table[i][j] = max(val[i-1] + table[i-1][j-wt[i-1]],  table[i-1][j]) 
+                k[i][w] = max(values[i - 1] + k[i - 1][w - weights[i - 1]], k[i - 1][w])
             # vekten er for stor til i inkludere objektet
-            else: 
-                table[i][j] = table[i-1][j] 
-    
-    #find total profit: (last cell of the table)
-    print(table[n][W]) 
-    
+            else:
+                k[i][w] = k[i - 1][w]
+     #find total profit: (last cell of the table)
+    res = k[len(weights)][capacity]
+    print(f'Max profit: {res}$')
+
     # find items added to the sack. Her jobbet vi baklengs, og ser hva som har blitt lagt til.
     sack = []
     for i in range(n, 0, -1):
         if res <= 0:
             break
-        # either the result comes from (table[i-1][w]) or from 
+        
+       # either the result comes from (table[i-1][w]) or from 
         # (val[i-1] + table[i-1] [w-wt[i-1]]).
         # If it comes from the latter one it means the item is included in sack.
         
-        #item not included, ignore
-        if res == table[i - 1][W]:
+        #item not included, ignore.
+        if res == k[i - 1][capacity]:
             continue
         else:
-            # This item is included. Add to sack list, to keep control over items we have choosen to put in the sack
-            sack.append(wt[i - 1])
-            # Since the weight is included its value is deducted
-            res = res - val[i - 1]
-            W = W - wt[i - 1]
+            # This item is included.  Add to sack list, to keep control over items we have choosen to put in the sack
+            sack.append(weights[i - 1])
+            # Since this weight is included
+            # its value is deducted
+            res = res - values[i - 1]
+            capacity = capacity - weights[i - 1]
     print(f'Weigths used: {sack}')
- 
-val = [120, 200, 150, 350, 100, 90]
-wt = [15, 20, 40, 50, 20, 10]
-W = 100
-n=len(val)
- 
-knapSack(W, wt, val, n)
+
+
+detailed_knap_sack(values, weights, capacity)
 
 
 # EXERCISE 2 - OOP classes
