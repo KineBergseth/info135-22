@@ -6,6 +6,7 @@
 
 def knapSack(W, wt, val, n): 
     
+    #lage rutenett
     table = [[0 for x in range(W + 1)] for x in range(n + 1)] 
  
     for i in range(n + 1): 
@@ -28,10 +29,10 @@ def knapSack(W, wt, val, n):
             else: 
                 table[i][j] = table[i-1][j] 
     
-    #find profit: (last cell of the table)
+    #find total profit: (last cell of the table)
     print(table[n][W]) 
     
-    # find items added to the sack
+    # find items added to the sack. Her jobbet vi baklengs, og ser hva som har blitt lagt til.
     sack = []
     for i in range(n, 0, -1):
         if res <= 0:
@@ -39,13 +40,14 @@ def knapSack(W, wt, val, n):
         # either the result comes from (table[i-1][w]) or from 
         # (val[i-1] + table[i-1] [w-wt[i-1]]).
         # If it comes from the latter one it means the item is included in sack.
+        
+        #item not included, ignore
         if res == table[i - 1][W]:
             continue
         else:
-            # This item is included.
+            # This item is included. Add to sack list, to keep control over items we have choosen to put in the sack
             sack.append(wt[i - 1])
-            # Since this weight is included
-            # its value is deducted
+            # Since the weight is included its value is deducted
             res = res - val[i - 1]
             W = W - wt[i - 1]
     print(f'Weigths used: {sack}')
