@@ -54,8 +54,7 @@ class Mammal(Animal):
         return f'{self.name} {Mammal.speech_action}'
 
     def __str__(self):
-        return f'{self.name} the {self.species}: Skin: {Mammal.skin_type}, Alive: {self.alive}, ' \
-               f'Carnivorous: {self.carnivorous} '
+        return super().__str__() + f' Skin: {Mammal.skin_type}, Carnivorous: {self.carnivorous} '
 
 
 class Reptile(Animal):
@@ -98,11 +97,25 @@ class Enclosure:
         self.animals = set()  # utilize set to store animals, lists are also good
 
     def add_animal(self, animal):
-        self.animals.add(animal)
-        self.check_if_prey()  # see if animals is compatible
+        self.is_conflict(animal) # chech if animal is compatible with existing
+        self.check_if_prey()  # if advice ignored, check if someone dies :o
 
     def remove_animal(self, animal):
         self.animals.remove(animal)
+        
+    def is_conflict(self, new_animal):
+        for animal in self.animals:
+            if animal.carnivorous != new_animal.carnivorous:
+                print(f'''
+                you are trying to put {new_animal.name} in enclosure {self.id}. Are you sure you want to have a carnivorous and herbivore in the same cage?
+                ''')
+                answer= input('do you want to proceed anyway (y/n)?')
+                if answer == 'n':
+                    print(f'you have chosen to not put {new_animal.name} in the cage. you have avoided conflict', end='\n\n')
+                    return
+        else: 
+            self.animals.add(new_animal)
+            print(f'added {new_animal.name} to enclosure {self.id}', end='\n\n')
 
     def check_if_prey(self):
         # when any new animal enters enclosure check if any animals in cage should be eaten
@@ -199,6 +212,7 @@ if __name__ == '__main__':
     bird1 = Bird('Flautingo', 'flamingo', True)
     bird2 = Bird('Malliceo', 'parrot', True)
     bird3 = Bird('Tucoda', 'penguin', False)
+    print(mammal1)
 
     # create enclosures and add animals
     enclosure1 = Enclosure('1')
@@ -240,4 +254,3 @@ if __name__ == '__main__':
     print('')
     print('RANDOM EVENT')
     decease()
-
