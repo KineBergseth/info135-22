@@ -182,5 +182,5 @@ if list1_as_set == list2_as_set == intersection:
 else:
     print('they are not the same')
 
-print(list1_as_set.difference(list2_as_set))
-print(list2_as_set.difference(list1_as_set))
+print(list1_as_set.difference(list2_as_set))  # see elements that list1 has, that are different from list2. If no differences, it returns empty set.
+print(list2_as_set.difference(list1_as_set))  # see elements that list2 has, that are different from list1. In this case the value 22 is different, and only in list2 
