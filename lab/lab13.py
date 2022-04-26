@@ -172,12 +172,12 @@ al = [9, 8, 7, 6, 5, 4, 3, 2, 1]
 
 bl = [1, 2, 3, 4, 5, 6, 7, 8, 9, 22]
 
-list1_as_set = set(al)
+list1_as_set = set(al)  # convert lists to set
 list2_as_set = set(bl)
 
-intersection = list1_as_set.intersection(list2_as_set)
+intersection = list1_as_set.intersection(list2_as_set)  # find elements that are in both sets
 print(intersection)
-if list1_as_set == list2_as_set == intersection:
+if list1_as_set == list2_as_set == intersection:  # if both sets contain only the elements in the intersection, the sets must be identical
     print('they are the same items')
 else:
     print('they are not the same')
