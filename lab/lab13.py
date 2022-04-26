@@ -4,9 +4,9 @@
 
 The Big O notation for f(n) can be derived from the following simplification rules:
 
-    If f(n) is a sum of several terms, we keep only the one with largest growth rate.
-    1 ≺ < log n < n ≺ n2 ≺ n3 . . . ≺ n log n ≺ n^2 < 2^n ≺ n!
-    If f(n) is a product of several factors, any constant is omitted.
+    - If f(n) is a sum of several terms, we keep only the one with largest growth rate.
+        In order best to worst Big-O complexity: 1 < log n < n < n log n < n^2 < 2^n < n!
+    - If f(n) is a product of several factors, any constant is omitted.
 
 A) f(n) = O(n^2 + 3n + 6 + 3*2^n)
 
@@ -99,6 +99,7 @@ Thus 6n + 4 is O(n) because 6n + 4 ≤ 10n whenever n > 1.
 
 
 
+
 B) Show that T(n) = n^2 + 5n + 2 is O(n^2)		
 
 Choose n0 = 1
@@ -163,6 +164,9 @@ else:
 # Issues may have arosen if they were different say on spot 550 - 560, then a more thorugh soloution had to be implemented
 # Can you think on how you would solve it then?
 # hint: For loops may be of use as you have to go through each element in the lists and see if they are equal
+
+# Lists are ordered. Another way to check if list a and b are equal without sorting them is converting them to sets (sets are unordered) and 
+# using set metods such as intersection and differnce (think about venn diagrams and how one can see what items are the same or differnt when comparing two sets) 
 
 al = [9, 8, 7, 6, 5, 4, 3, 2, 1]
 
