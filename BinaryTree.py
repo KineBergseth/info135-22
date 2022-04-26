@@ -31,3 +31,39 @@ class BinaryTree:
         print(self.value),
         if self.right_child:
             self.right_child.print_tree()
+
+    def pretty_print(self, indent=0):
+        if self.left_child:
+            self.left_child.pretty_print(indent + 1)
+        print(' ' * 4 * indent + '-> ' + self.value)
+        if self.right_child:
+            self.right_child.pretty_print(indent + 1)
+
+    def invert_tree(self):
+        self.left_child, self.right_child = self.right_child, self.left_child
+        if self.right_child:
+            self.right_child.invert_tree()
+        if self.left_child:
+            self.left_child.invert_tree()
+
+
+def build_my_tree():
+    my_tree = BinaryTree("H")
+    my_tree.insert_left("A")
+    my_tree.insert_right("C")
+
+    my_tree.left_child.insert_left("D")
+    my_tree.left_child.insert_right("E")
+
+    my_tree.right_child.insert_right("B")
+
+    my_tree.right_child.right_child.insert_left("G")
+    my_tree.right_child.right_child.insert_right("F")
+
+    return my_tree
+
+
+tree = build_my_tree()
+tree.pretty_print()
+tree.invert_tree()
+tree.pretty_print()

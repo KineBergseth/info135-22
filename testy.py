@@ -1,63 +1,53 @@
-# Task 3)
-
-class Graph:
-    graph = dict()
-    searched = []
-
-    def breadth_first_search(self, node):
-
-        searched = [node]
-        search_queue = [node]
-
-        while search_queue:
-            node = search_queue.pop(0)
-
-            print("[", node, end=" ], ")
-
-            if node in self.graph:
-                for neighbour in self.graph[node]:
-                    if neighbour not in searched:
-                        searched.append(neighbour)
-                        search_queue.append(neighbour)
-
-    def depth_first_search(self, node):
-        if node not in self.searched:
-            self.searched.append(node)
-            print("[", node, end=" ], ")
-            if node in self.graph:
-                for neighbour in self.graph[node]:
-                    self.depth_first_search(neighbour)
-
-    def add_edge(self, node, neighbour):
-        if node not in self.graph:
-            self.graph[node] = [neighbour]
+class Binarysearchtree:
+    def __init__(self, value = None):
+        self.value = value
+        if self.value:
+            self.left_child = Binarysearchtree()
+            self.right_child = Binarysearchtree()
         else:
-            self.graph[node].append(neighbour)
+            self.left_child = None
+            self.right_child = None
 
-    def print_graph(self):
-        print(self.graph)
+    def is_empty(self):
+        return self.value is None
 
-    def print_edges(self):
-        for node in self.graph:
-            for neighbour in self.graph[node]:
-                print("(", node, ",", neighbour, ")")
+    def insert(self, value):
+        if self.is_empty():
+            self.value = value
+            self.left_child = Binarysearchtree()
+            self.right_child = Binarysearchtree()
+        elif value < self.value:
+            self.left_child.insert(value)
+        elif value > self.value:
+            self.right_child.insert(value)
+
+    def compute_sum(self):
+        sum = sumRight = sumLeft = 0;
+
+        # Check whether tree is empty
+        if self.is_empty():
+            print("Tree is empty")
+            return 0
+        else:
+            # Calculate the sum of nodes present in left subtree
+            if (self.left_child != None):
+                sumLeft = self.left_child.compute_sum()
+
+                # Calculate the sum of nodes present in right subtree
+            if (self.right_child != None):
+                sumRight = self.right_child.compute_sum()
+
+                # Calculate the sum of all nodes by adding sumLeft, sumRight and root node's data
+            sum = self.value + sumLeft + sumRight
+        return sum
 
 
-my_graph = Graph()
-my_graph.add_edge('A', 'B')
-my_graph.add_edge('A', 'C')
-my_graph.add_edge('B', 'C')
-my_graph.add_edge('B', 'D')
-my_graph.add_edge('C', 'E')
-my_graph.add_edge('D', 'E')
-my_graph.add_edge('D', 'G')
-my_graph.add_edge('D', 'H')
-my_graph.add_edge('E', 'F')
-my_graph.add_edge('F', 'C')
+my_tree2 = Binarysearchtree()
+my_tree2.insert(2)
+my_tree2.insert(4)
+my_tree2.insert(6)
+my_tree2.insert(8)
+my_tree2.insert(10)
 
-result = my_graph.depth_first_search('A')
-print(result)
-
-"""
-Får en importError pga import statementene dine øverst
-"""
+print('Sum: ', my_tree2.compute_sum())
+#print('Number of nodes : ', my_tree2.compute_count())

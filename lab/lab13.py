@@ -5,6 +5,7 @@
 The Big O notation for f(n) can be derived from the following simplification rules:
 
     If f(n) is a sum of several terms, we keep only the one with largest growth rate.
+    1 ≺ < log n < n ≺ n2 ≺ n3 . . . ≺ n log n ≺ n^2 < 2^n ≺ n!
     If f(n) is a product of several factors, any constant is omitted.
 
 A) f(n) = O(n^2 + 3n + 6 + 3*2^n)
@@ -146,9 +147,17 @@ b1 = quick_sort(b)
 
 print("a1: ", a1)
 print("b1: ", b1)
+if a1 == b1:
+    print('they are the same items')
+else:
+    print('they are not the same items')
 
 b1.pop(-1)
 print("fixed b:", b1)
+if a1 == b1:
+    print('they are the same items')
+else:
+    print('they are not the same items')
 
 # Here we use Quick sort to see if the list are equal, if these had been bigger then this would still be fine but
 # Issues may have arosen if they were different say on spot 550 - 560, then a more thorugh soloution had to be implemented
@@ -164,6 +173,10 @@ list2_as_set = set(bl)
 
 intersection = list1_as_set.intersection(list2_as_set)
 print(intersection)
+if list1_as_set == list2_as_set == intersection:
+    print('they are the same items')
+else:
+    print('they are not the same')
 
 print(list1_as_set.difference(list2_as_set))
 print(list2_as_set.difference(list1_as_set))

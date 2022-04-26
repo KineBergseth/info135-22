@@ -11,7 +11,6 @@ n = len(values)
 
 
 def detailed_knap_sack(values, weights, capacity):
-    
     #lage rutenett
     k = [[0 for _ in range(capacity + 1)] for _ in range(len(weights) + 1)]
 
