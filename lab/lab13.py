@@ -4,9 +4,9 @@
 
 The Big O notation for f(n) can be derived from the following simplification rules:
 
-    If f(n) is a sum of several terms, we keep only the one with largest growth rate.
-    1 ≺ < log n < n ≺ n2 ≺ n3 . . . ≺ n log n ≺ n^2 < 2^n ≺ n!
-    If f(n) is a product of several factors, any constant is omitted.
+    - If f(n) is a sum of several terms, we keep only the one with largest growth rate.
+        In order best to worst Big-O complexity: 1 < log n < n < n log n < n^2 < 2^n < n!
+    - If f(n) is a product of several factors, any constant is omitted.
 
 A) f(n) = O(n^2 + 3n + 6 + 3*2^n)
 
@@ -99,6 +99,7 @@ Thus 6n + 4 is O(n) because 6n + 4 ≤ 10n whenever n > 1.
 
 
 
+
 B) Show that T(n) = n^2 + 5n + 2 is O(n^2)		
 
 Choose n0 = 1
@@ -164,19 +165,22 @@ else:
 # Can you think on how you would solve it then?
 # hint: For loops may be of use as you have to go through each element in the lists and see if they are equal
 
+# Lists are ordered. Another way to check if list a and b are equal without sorting them is converting them to sets (sets are unordered) and 
+# using set metods such as intersection and differnce (think about venn diagrams and how one can see what items are the same or differnt when comparing two sets) 
+
 al = [9, 8, 7, 6, 5, 4, 3, 2, 1]
 
 bl = [1, 2, 3, 4, 5, 6, 7, 8, 9, 22]
 
-list1_as_set = set(al)
+list1_as_set = set(al)  # convert lists to set
 list2_as_set = set(bl)
 
-intersection = list1_as_set.intersection(list2_as_set)
+intersection = list1_as_set.intersection(list2_as_set)  # find elements that are in both sets
 print(intersection)
-if list1_as_set == list2_as_set == intersection:
+if list1_as_set == list2_as_set == intersection:  # if both sets contain only the elements in the intersection, the sets must be identical
     print('they are the same items')
 else:
     print('they are not the same')
 
-print(list1_as_set.difference(list2_as_set))
-print(list2_as_set.difference(list1_as_set))
+print(list1_as_set.difference(list2_as_set))  # see elements that list1 has, that are different from list2. If no differences, it returns empty set.
+print(list2_as_set.difference(list1_as_set))  # see elements that list2 has, that are different from list1. In this case the value 22 is different, and only in list2 
