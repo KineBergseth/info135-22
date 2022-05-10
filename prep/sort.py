@@ -172,3 +172,6 @@ def mergeSort(arr):
 
 mergeSort(e)
 print("merge: ", e)
+
+
+#http://web.mit.edu/16.070/www/lecture/big_o.pdf
