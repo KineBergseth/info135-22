@@ -109,8 +109,6 @@ class Graph:
 
     def find_cycle(self, node):
         my_graph.breadth_first_search(node)
-        # Jeg får ikke funksjonen til å fungere med breadth-first-algoritmen. Jeg får ut cycle not found. Kan du se på hvorfor?
-        # my_graph.depth_first_search(node)
         for element in self.temp:
             if element in self.saml:
                 return 'Cycle found! '
