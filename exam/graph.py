@@ -1,8 +1,10 @@
-# Issue 3:
+"""
+A Graph class with relevant methods
+"""
+
+
 class Graph:
     graph = dict()
-    # temp = []
-    # saml = []
     searched = []
 
     def add_edge(self, node, neighbour):
