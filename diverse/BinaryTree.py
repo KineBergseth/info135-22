@@ -24,46 +24,29 @@ class BinaryTree:
             new_node.right_child = self.right_child
             self.right_child = new_node
 
-    # in-order print
-    def print_tree(self):
+    """
+    In-order print of binary tree
+    Recursively traverse its left subtree. When this step is finished, we are back at n again.
+    Process n itself.
+    Recursively traverse its right subtree. When this step is finished, we are back at n again. 
+    """
+    def print_in_order(self):
         if self.left_child:
-            self.left_child.print_tree()
-        print(self.value),
+            self.left_child.print_in_order()
+        print(self.value, end=" ")
         if self.right_child:
-            self.right_child.print_tree()
+            self.right_child.print_in_order()
 
-    def pretty_print(self, indent=0):
+    def print_pre(self):
+        print(self.value, end=" ")
         if self.left_child:
-            self.left_child.pretty_print(indent + 1)
-        print(' ' * 4 * indent + '-> ' + self.value)
+            self.left_child.print_pre()
         if self.right_child:
-            self.right_child.pretty_print(indent + 1)
+            self.right_child.print_pre()
 
-    def invert_tree(self):
-        self.left_child, self.right_child = self.right_child, self.left_child
-        if self.right_child:
-            self.right_child.invert_tree()
+    def print_post(self):
         if self.left_child:
-            self.left_child.invert_tree()
-
-
-def build_my_tree():
-    my_tree = BinaryTree("H")
-    my_tree.insert_left("A")
-    my_tree.insert_right("C")
-
-    my_tree.left_child.insert_left("D")
-    my_tree.left_child.insert_right("E")
-
-    my_tree.right_child.insert_right("B")
-
-    my_tree.right_child.right_child.insert_left("G")
-    my_tree.right_child.right_child.insert_right("F")
-
-    return my_tree
-
-
-tree = build_my_tree()
-tree.pretty_print()
-tree.invert_tree()
-tree.pretty_print()
+            self.left_child.print_post()
+        if self.right_child:
+            self.right_child.print_post()
+        print(self.value, end=" ")

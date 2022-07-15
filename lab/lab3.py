@@ -127,7 +127,7 @@ Example:
 > [(0,1,1), (1,1,2), (1,2,3)] 
 """
 # Import variable 'liste' from the file large_list.py
-from large_list import liste
+from diverse.large_list import liste
 
 
 def filter_tuples(t_list: List[Tuple[int, int, int]]) -> List[Tuple[int, int, int]]:

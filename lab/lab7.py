@@ -32,7 +32,6 @@ class Graph:
         del self.graph[node]
         for nodes in self.graph:
             p = len(self.graph[nodes])
-            print(p)
             if self.graph[nodes][p-1] == node:
                 del self.graph[nodes][p-1]
 

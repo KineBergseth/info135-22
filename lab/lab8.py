@@ -1,36 +1,16 @@
 """
-Exercise 1
-# https://www.upgrad.com/blog/5-types-of-binary-tree/
-SOME FACTS ABOUT BINARY TREES:
-A binary tree is a tree data structure in which each node has at most two children. A node can have 0, 1 or 2 children.
+Excercise 1
 
-Node: It represents a termination point in a tree.
-Root: A tree’s topmost node.
-Parent: Each node (apart from the root) in a tree that has at least one sub-node of its own is called a parent node.
-Child: A node that straightway came from a parent node when moving away from the root is the child node.
-Leaf Node: These are external nodes. They are the nodes that have no child.
-Internal Node: As the name suggests, these are inner nodes with at least one child.
-Depth of a Tree: The number of edges from the tree’s node to the root is.
-Height of a Tree: It is the number of edges from the node to the deepest leaf. The tree height is also considered the root height.
-
-TYPES OF BINARY TREES:
-Full: a tree in which every node has either 0 or 2 children.
-Complete: a tree where every node on every level has 2 children, except the last level. The last level can either have
-no nodes, or it can have nodes. If there are nodes on the last level they must be as far left as possible.
-Perfect: a tree where all interior nodes have 2 children, and all leaf nodes are the same depth.
-
-
-
-A. The First one, is a joke for one of the most horrible "trees" you can have, it is truly horrendous set up of a tree.(Yuck)
+The First one, is a joke for one of the most horrible "trees" you can have, it is truly horrendous set up of a tree.(Yuck)
 It is not perfect, complete, full or even binary it is truly awful
 
-B is a full, complete binary tree
+B is a full, complete, binary tree
 
-C is full, complete, perfect binary tree.
+C is full, perfect, complete binary tree.
 
 """
 
-# Exercise 2 - see last week's code
+
 
 
 """

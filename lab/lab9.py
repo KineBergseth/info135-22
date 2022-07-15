@@ -6,7 +6,58 @@ Exercise 1
 """
 
 # Exercise 2
-from BinaryTree import BinaryTree
+class BinaryTree:
+    def __init__(self, value):
+        self.value = value
+        self.left_child = None
+        self.right_child = None
+
+    def insert_left(self, value):
+        # If the current node does not have a left child, we just create a new node and set it to the current node’s
+        # left_child.
+        if self.left_child is None:
+            self.left_child = BinaryTree(value)
+        # If it does have the left child, we create a new node and put it in the current left child’s place. Allocate
+        # this left child node to the new node’s left child.
+        else:
+            new_node = BinaryTree(value)
+            new_node.left_child = self.left_child
+            self.left_child = new_node
+
+    def insert_right(self, value):
+        if self.right_child is None:
+            self.right_child = BinaryTree(value)
+        else:
+            new_node = BinaryTree(value)
+            new_node.right_child = self.right_child
+            self.right_child = new_node
+
+    """
+    In-order print of binary tree
+    Recursively traverse its left subtree. When this step is finished, we are back at n again.
+    Process n itself.
+    Recursively traverse its right subtree. When this step is finished, we are back at n again. 
+    """
+    def print_in_order(self):
+        if self.left_child:
+            self.left_child.print_in_order()
+        print(self.value, end=" ")
+        if self.right_child:
+            self.right_child.print_in_order()
+
+    def print_pre(self):
+        print(self.value, end=" ")
+        if self.left_child:
+            self.left_child.print_pre()
+        if self.right_child:
+            self.right_child.print_pre()
+
+    def print_post(self):
+        if self.left_child:
+            self.left_child.print_post()
+        if self.right_child:
+            self.right_child.print_post()
+        print(self.value, end=" ")
 
 
 def build_my_tree():
@@ -25,7 +76,10 @@ def build_my_tree():
     return my_tree
 
 
-tree = build_my_tree()
+
+tree = build_my_tree() # lag tre og sett inn data
+
+# dette er en statisk og dårlig måte å printe ting ut på
 print(f"Level 0:\t\t   {tree.value}")
 print(f"Level 1:\t{tree.left_child.value}\t\t\t{tree.right_child.value}")
 print(f"Level 2: "
@@ -36,8 +90,30 @@ print(f"Level 3: "
       f"\t\t\t\t{tree.right_child.right_child.left_child.value}\t"
       f"\t{tree.right_child.right_child.right_child.value}\t")
 
-# in order print
-print(tree.print_tree())
+print()
+
+# ulike rekkefølger man kan printe i
+print('pre-order:')
+tree.print_pre()
+print('\n in-order:')
+tree.print_in_order()
+print('\n post-order')
+tree.print_post()
+
+
+# pretty print med in-order rekkefølge
+# Her bruker jeg en level parameter for å gi indentering for å representere nivåer
+def printTree(node, level=0):
+    if node is not None:
+        printTree(node.left_child, level + 1)
+        print(' ' * 4 * level + '-> ' + node.value)
+        printTree(node.right_child, level + 1)
+
+
+print('\n\n')
+printTree(tree)
+
+print('')
 
 
 # Exercise 3 BST from lecture, see bottom functions
@@ -97,7 +173,7 @@ class BinarySearchTree:
         if self.is_empty():
             return []
         else:
-            self.left_child.in_order() + [self.value] + self.right_child.in_order()
+            return self.left_child.in_order() + [self.value] + self.right_child.in_order()
 
     def pre_order(self):
         if self.is_empty():
@@ -117,7 +193,6 @@ class BinarySearchTree:
         minimum = self
         while minimum.left_child.value is not None:
             minimum = minimum.left_child
-            print(minimum.value)
 
         print(minimum.value)
 
@@ -138,6 +213,7 @@ my_Bst.insert(2)
 my_Bst.insert(5)
 my_Bst.insert(-1)
 
+my_Bst.in_order()
 print("Min: ")
 my_Bst.get_min()
 print("Max: ")
@@ -146,6 +222,8 @@ my_Bst.get_max()
 """
 Exercise 4 
 
-The answer is n^4, as that is the term with the largest growth rate so we remove all other terms than n^4/9. 
-Then since 9n^4 does not grow dependent on 9 and 9 is a constant we can remove it. Then we are left with n^4 
+The answer is n^4, as that is the term with the largest growth rate so we remove all other terms than 9n^4. 
+(n^4 er polynomial, log n er logarithmic. the polynomial term has bigger growth)
+Then since 9n^4 does not grow dependent on 9, and 9 is a constant we can remove it. Then we are left with n^4 
+
 """

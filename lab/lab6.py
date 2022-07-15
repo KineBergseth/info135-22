@@ -53,7 +53,7 @@ class PasswordDatabase:
 
     def get_login(self):
         username = input("Enter username: ")
-        password = h1.sha1(input("Enter password: ").encode()).hexdigest()
+        password = h1.sha1(input("Enter password: ").encode()).digest()
         return username, password
 
     def create_user(self):

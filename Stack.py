@@ -19,43 +19,18 @@ class Stack:
         return self.size() <= 0
 
 
-def r(liste):
+# reverse list with stack, using only is_empty, push, pop stack methods
+def reverse_list(my_list):
+    reversed_list = []
     s = Stack()
-    for item in liste:
-        s.push(item)
+    for i in my_list:
+        s.push(i)
+    print(f"Current stack in original order: {s.items}")
+    while not s.is_empty():
+        reversed_list.append(s.pop())
+    return f"reversed list: {reversed_list}"
 
 
-
-
-
-
-
-
-def reverse_list(stack, my_list):
-    for i in range(len(my_list)):
-        stack.push(i)
-    print(stack.items)
-    while not stack.is_empty():
-        print(stack.pop())
-
-# print(reverse_list())
-
-li = [1, 2, 3]
-s = Stack()
-print(reverse_list(s, li))
-
-# def reverse_list(input_list):
-#     s = Stack.Stack()
-#     rev_list = []
-#
-#     for item in input_list:
-#         s.push(item)
-#
-#     while not s.isEmpty():
-#         rev_list.append(s.pop())
-#     return rev_list
-#
-#
-# test_list = [1, 2, 3, 4, 5, 6]
-# n_list = reverse_list(test_list)
-# print(n_list)
+if __name__ == "__main__":
+    li = [1, 2, 3]
+    print(reverse_list(li))

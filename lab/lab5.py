@@ -14,6 +14,26 @@ class MiniBank:
     def __init__(self, money):
         self.money = money
 
+    # method to deposit money into account based on input value, and print relevant info
+    def deposit_money(self):
+        amount = float(input("Enter amount of money you wish to deposit into your bank account: "))
+        self.money += amount
+        print(f"Money deposited: {amount} kr, Total balance: {self.money} kr")
+
+    # method to withdraw money from account based on input value, and print relevant info
+    def withdraw_money(self):
+        amount = float(input("Enter amount of money you wish to withdraw from your bank account: "))
+        if amount > self.money:
+            print("Insufficient funds")
+            return
+        else:
+            self.money -= amount
+            print(f"Money withdrawn: {amount} kr, Total balance: {self.money} kr")
+
+    # print current balance
+    def display_balance(self):
+        print(f"Current balance is: {self.money}")
+
     # Sorting method that uses merge sort as seen in lectures
     def sort_bills(self, bills):
         if len(bills) > 1:
@@ -65,9 +85,12 @@ class MiniBank:
 
 bills = [("Strøm", 1234), ("Leie", 5000), ("Wolfram alpha", 200), ("Velvære", 5000)]
 joe = MiniBank(6000)
+joe.deposit_money()
+joe.withdraw_money()
 joe.sort_bills(bills)
 print(bills)
 joe.pay_bill(bills)
+joe.display_balance()
 
 """
 Task 2 fibonaci and O(n)
